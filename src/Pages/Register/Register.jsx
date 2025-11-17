@@ -1,10 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
-
-    const {createuser} = useContext(AuthContext)
+ 
+    const navigate = useNavigate()
+    const { createuser } = useContext(AuthContext)
 
     const handelegister = (e) => {
         e.preventDefault()
@@ -13,18 +16,29 @@ const Register = () => {
         const password = form.password.value;
 
         //const user = { email, password };
-        
+
         //sent user data to context
-        createuser(email,password)
-        .then(result =>{
-            console.log(result.user);
-            
-        } )
-        .catch( error =>{
-            console.log(error);
-            
-        } )
-        
+        createuser(email, password)
+            .then(result => {
+
+                console.log(result);
+                
+                Swal.fire({
+                    title: "Created  Succesfully",
+                    icon: "success"
+                });
+                navigate('/')
+
+            })
+            .catch(error => {
+                console.log(error);
+                Swal.fire({
+                    title: "failed",
+                    icon: "error"
+                });
+
+            })
+
     }
 
     return (

@@ -21,8 +21,9 @@ const UpdateCoffee = () => {
 
         const updatecoffee = { coffeename, chefName, supplyername, taste, category, details, imgeurl };
 
-        fetch(`https://coffe-store-server-khaki.vercel.app/addCoffee/${loadedCoffee._id}`, {
+        fetch(`${import.meta.env.VITE_Api_url}/addCoffee/${loadedCoffee._id}`, {
             method: 'PUT',
+            credentials : 'include',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(updatecoffee)
 

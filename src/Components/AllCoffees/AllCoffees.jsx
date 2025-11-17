@@ -6,13 +6,18 @@ import CoffeeCard from "../CoffeeCard/CoffeeCard";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../providers/AuthProvider";
 
+
+
+
 const AllCoffees = () => {
     const [coffees, setcoffees] = useState([])
     const { user } = useContext(AuthContext)
 
     useEffect(() => {
 
-        fetch('https://coffe-store-server-khaki.vercel.app/addCoffee')
+        fetch(`${import.meta.env.VITE_Api_url}/addCoffee`
+            
+        )
             .then(res => res.json())
             .then(data => {
                 console.log(data);
@@ -39,9 +44,11 @@ const AllCoffees = () => {
                 const newCoffees = coffees.filter((coffee) => coffee._id != e);
                 setcoffees(newCoffees);
 
-                fetch(`https://coffe-store-server-khaki.vercel.app/addCoffee/${e}`, {
-                    method: "DELETE"
-                })
+                fetch(`${import.meta.env.VITE_Api_url}/addCoffee/${e}`, {
+                    method: "DELETE",
+                    credentials : 'include',
+                    
+                }) 
                     .then(res => res.json())
                     .then(data => {
 
@@ -92,6 +99,7 @@ const AllCoffees = () => {
 
                         </div>
                     }
+
 
 
                 </div>

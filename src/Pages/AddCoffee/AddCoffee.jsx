@@ -17,18 +17,21 @@ const AddCoffee = () => {
         const coffee = { coffeename, chefName, supplyername, taste, category, details, imgeurl };
 
 
-        fetch('https://coffe-store-server-khaki.vercel.app/addCoffee', {
+        fetch(`${import.meta.env.VITE_Api_url}/addCoffee`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
+            
+            credentials : 'include',
+            
             body: JSON.stringify(coffee),
 
         })
             .then(res => res.json())
             .then(data => {
                 if (data.insertedId ) {
-                    alert("coffy aded succesfully")
+                    alert("coffy added succesfully")
                 }
 
             })

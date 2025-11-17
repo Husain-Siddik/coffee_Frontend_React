@@ -3,12 +3,20 @@ import { useContext } from 'react';
 import logo from '../../assets/images/more/logo1.png'
 import { AuthContext } from '../../providers/AuthProvider';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import { FaPlus } from "react-icons/fa";
+
 const Header = () => {
 
     const { logOutUser, user } = useContext(AuthContext)
 
     const handelSignOut = () => {
-        logOutUser()
+        logOutUser();
+        Swal.fire({
+            title: "Log Out Succesfull",
+            icon: "success"
+        });
+
     }
 
     return (
@@ -39,15 +47,20 @@ const Header = () => {
                             className="menu menu-sm dropdown-content bg-[#eceae3] text-black  rounded-box z-1 mt-3 w-52 p-2 shadow">
                             <li>
                                 {
-                                    user ? <div>
+                                    user ? <div className='flex flex-col '>
                                         <ul>
                                             <p>{user?.email}</p>
                                             <a onClick={handelSignOut} className='text-xl'>Logout</a>
+                                            
+
                                         </ul>
+                                        <div>
+                                            <Link className='btn btn-dash btn-success' to={'/register'}> <FaPlus /> Add New Admin </Link>
+                                        </div>
                                     </div>
                                         :
                                         <div>
-                                            <Link className='text-xl' to={'/login'} >Login</Link>
+                                            <Link className='text-xl' to={'/login'} >Admin Login</Link>
                                         </div>
 
                                 }

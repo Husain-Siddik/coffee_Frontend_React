@@ -13,6 +13,7 @@ import Login from './Pages/Login/Login.jsx';
 import Register from './Pages/Register/Register.jsx';
 import AuthProvider from './providers/AuthProvider.jsx';
 import PrivateRoute from './privetRoutes/PrivateRoute.jsx';
+import CoffeeDetails from './Pages/viewDetails/CoffeeDetails.jsx';
 // import AuthProvider from './providers/AuthProvider.jsx';
 
 const router = createBrowserRouter([
@@ -33,7 +34,14 @@ const router = createBrowserRouter([
       {
         path: '/updateCoffee/:id',
         element:<PrivateRoute><UpdateCoffee /></PrivateRoute> ,
-        loader: ({ params }) => fetch(`https://coffe-store-server-khaki.vercel.app/addCoffee/${params.id}`)
+        loader: ({ params }) => fetch(`
+         ${import.meta.env.VITE_Api_url}/addCoffee/${params.id}`)
+      },
+      {
+       path :'/coffeeDetails/:id',
+       element:<CoffeeDetails/>,
+       loader:({ params })=>fetch(`${import.meta.env.VITE_Api_url}/addCoffee/${params.id}`)
+       
       },
       {
         path: '/login',
@@ -41,7 +49,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/register',
-        element: <Register />
+        element:<PrivateRoute><Register /></PrivateRoute>  
       }
     ],
   },
