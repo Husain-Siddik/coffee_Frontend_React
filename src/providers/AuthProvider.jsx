@@ -52,7 +52,7 @@ const AuthProvider = ({ children }) => {
                 //     console.log( 'jwt er jamela ', error);
 
                 // })
-                axios.post('http://localhost:5000/jwt', userdata,
+                axios.post(`import.meta.env.VITE_Api_url`, userdata,
                     {
                         withCredentials: true
                     }
